@@ -1,6 +1,7 @@
 package by.bsu.controller;
 
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -12,11 +13,9 @@ import org.thymeleaf.web.IWebRequest;
 
 public class ParentController implements IController {
     private static final Logger LOGGER = LogManager.getLogger();
-    protected List<String> arguments;
     protected String template;
 
-    ParentController(List<String> arguments, String template) {
-        this.arguments = arguments;
+    ParentController(String template) {
         this.template = template;
     }
 
@@ -24,8 +23,8 @@ public class ParentController implements IController {
     public void process(IWebExchange webExchange, ITemplateEngine templateEngine, Writer writer) throws Exception {
         WebContext ctx = new WebContext(webExchange, webExchange.getLocale());
         IWebRequest wr = ctx.getExchange().getRequest();
-        if (wr.containsParameter(arguments.getFirst())) {
-            fulfillRecuest(ctx);
+        if (wr.getParameterCount() > 0) {
+            fulfillRecuest(ctx, wr);
         } else {
             LOGGER.info("Get request sends website");
         }
@@ -33,7 +32,7 @@ public class ParentController implements IController {
         templateEngine.process(template, ctx, writer);
     }
 
-    protected void fulfillRecuest(WebContext ctx) {
+    protected void fulfillRecuest(WebContext ctx, IWebRequest wr) throws Exception {
         LOGGER.error("No realization");
     }
     

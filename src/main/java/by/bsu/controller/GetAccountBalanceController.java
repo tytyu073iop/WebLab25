@@ -7,13 +7,21 @@ import org.thymeleaf.context.WebContext;
 import org.thymeleaf.web.IWebExchange;
 import org.thymeleaf.web.IWebRequest;
 
-public class GetAccountBalanceController implements IController {
+import by.bsu.daoPhysical.DaoAccounts;
+
+public class GetAccountBalanceController extends ParentController {
+
+    public GetAccountBalanceController() {
+        super("accountBalance");
+    }
 
     @Override
-    public void process(IWebExchange webExchange, ITemplateEngine templateEngine, Writer writer) throws Exception {
-        WebContext ctx = new WebContext(webExchange, webExchange.getLocale());
-        IWebRequest wr = ctx.getExchange().getRequest();
-        
+    public void fulfillRecuest(WebContext ctx, IWebRequest wr) throws Exception {
+        int AccountId = Integer.parseInt(wr.getParameterValue("AccountId"));
+
+        DaoAccounts da = new DaoAccounts();
+        Double result = da.readSingle(AccountId).getBalance();
+        ctx.setVariable("balance", result);
     }
     
 }

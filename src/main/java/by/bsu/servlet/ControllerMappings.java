@@ -18,6 +18,9 @@ public class ControllerMappings {
         controllersByURL = new HashMap<String, IController>();
         controllersByURL.put("/pages/accounts", new GetAccountsController());
         controllersByURL.put("/pages/sumPayments", new GetSumPayments());
+        controllersByURL.put("/pages/accountBalance", new GetAccountBalanceController());
+        controllersByURL.put("/pages/makeAPay", new MakeAPayController());
+        controllersByURL.put("/pages/deactivateCard", new DeactivateCardController());
        
     //    controllersByURL.put("/order/list", new OrderListController());
        

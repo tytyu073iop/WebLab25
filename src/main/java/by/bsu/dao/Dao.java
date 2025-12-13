@@ -49,7 +49,7 @@ public class Dao<T> {
 		}
 	}
 
-	public <Y> T readSingle(int id, SingularAttribute<T, Y> sa) throws DAOException {
+	protected <Y> T readSingle(int id, SingularAttribute<T, Y> sa) throws DAOException {
 		LOGGER.info("Getting object");
 		EntityManager em = null;
 		try {

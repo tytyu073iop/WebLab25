@@ -17,6 +17,10 @@ public class DaoAccounts extends Dao<Account> {
         super(Account.class);
     }
 
+	public Account readSingle(int id) throws DAOException {
+		return super.readSingle(id, Account_.accountId);
+	}
+
     public List<Account> getClientAccounts(int client_id) throws DAOException {
 		LOGGER.info("Getting client accounts");
 		EntityManager em = null;

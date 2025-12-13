@@ -1,0 +1,24 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <form action="" method="post">
+            <label for="cardNum">Card Number from:</label>
+            <input type="number" id="cardNum" name="CardNum" required>
+            <br>
+        <label for="AccountIdTo">Account ID to:</label><br>
+        <input type="number" id="AccountIdTo" name="AccountIdTo" 
+               placeholder="Enter account ID" 
+               required>
+               <br>
+               <label for="sum">sum:</label>
+               <input type="number" id="sum" name="Sum" required>
+        
+        <input type="submit" value="Submit">
+        <input type="reset" value="Clear">
+    </form>
+    <p th:if="${success}">Success</p>
+    <p th:unless="${success}">failure</p>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <form action="" method="GET">
+        <label for="AccountId">Account ID:</label><br>
+        <input type="number" id="AccountId" name="AccountId" 
+               placeholder="Enter account ID" 
+               required><br><br>
+        
+        <input type="submit" value="Submit">
+        <input type="reset" value="Clear">
+    </form>
+    <div th:if="${balance != null}">
+        <p>Balance:</p>
+        <p th:text="${balance}">0</p>
+    </div>
+
+    <a href="../index.html" th:href="@{/}">Return to home</a>
+    </body>
+</html>

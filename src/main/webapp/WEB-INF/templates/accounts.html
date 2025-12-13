@@ -1,0 +1,45 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <form action="" method="GET">
+        <label for="clientId">Client ID:</label><br>
+        <input type="number" id="clientId" name="ClientId" 
+               placeholder="Enter client ID" 
+               required><br><br>
+        
+        <input type="submit" value="Submit">
+        <input type="reset" value="Clear">
+    </form>
+    <div th:if="${accounts != null}">
+        <table>
+        <thead>
+            <tr>
+                <th>Account ID</th>
+                <th>Balance</th>
+                <th>Status</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="account : ${accounts}">
+                <td th:text="${account.accountId}">1</td>
+                <td th:text="${#numbers.formatDecimal(account.balance, 1, 2, 'POINT')}">
+                    1000.50 €
+                </td>
+                <td>
+                    <span th:if="${account.active}" class="active">Active</span>
+                    <span th:unless="${account.active}" class="inactive">Inactive</span>
+                </td>
+                <td th:text="${account.createdAt}">
+                    12/12/2024
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <a href="../index.html" th:href="@{/}">Return to home</a>
+    </body>
+</html>

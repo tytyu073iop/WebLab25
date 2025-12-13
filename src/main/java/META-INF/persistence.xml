@@ -10,10 +10,10 @@
 		<provider>
 			org.eclipse.persistence.jpa.PersistenceProvider
 		</provider>
-    		<class>entities.Client</class>
-    		<class>entities.Account</class> 
-    		<class>entities.CreditCard</class> 
-    		<class>entities.Payment</class> 
+    		<class>by.bsu.entities.Client</class>
+    		<class>by.bsu.entities.Account</class> 
+    		<class>by.bsu.entities.CreditCard</class> 
+    		<class>by.bsu.entities.Payment</class> 
 		   <exclude-unlisted-classes/>
     		<properties>
     		<property name="jakarta.persistence.jdbc.url" 

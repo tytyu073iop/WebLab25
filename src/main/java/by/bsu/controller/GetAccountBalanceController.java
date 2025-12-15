@@ -1,10 +1,6 @@
 package by.bsu.controller;
 
-import java.io.Writer;
-
-import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.context.WebContext;
-import org.thymeleaf.web.IWebExchange;
 import org.thymeleaf.web.IWebRequest;
 
 import by.bsu.daoPhysical.DaoAccounts;

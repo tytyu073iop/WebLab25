@@ -1,8 +1,6 @@
 package by.bsu.controller;
 
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +21,7 @@ public class ParentController implements IController {
     public void process(IWebExchange webExchange, ITemplateEngine templateEngine, Writer writer) throws Exception {
         WebContext ctx = new WebContext(webExchange, webExchange.getLocale());
         IWebRequest wr = ctx.getExchange().getRequest();
+        
         if (wr.getParameterCount() > 0) {
             fulfillRecuest(ctx, wr);
         } else {

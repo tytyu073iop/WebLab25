@@ -1,9 +1,5 @@
 package by.bsu.test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Date;
-
 import org.junit.jupiter.api.Test;
 
 import by.bsu.dao.DAOException;

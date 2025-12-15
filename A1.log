@@ -1,9 +1,4 @@
+INFO - user node0iantjhojbybp0tw7mns8sjd0 wants to do request
+INFO - user visits 16
+INFO - user visits 2025-12-15T16:29:23.012+0300
 INFO - Get request sends website
-INFO - Constructing dao
-INFO - getting instance
-INFO - Sucessfully created dataSource and entity manager
-INFO - getting entity manager
-INFO - releasing entity manager
-INFO - Updating object
-INFO - getting entity manager
-INFO - releasing entity manager

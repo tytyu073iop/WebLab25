@@ -1,14 +1,343 @@
-<html>
-    <head>
-        <title>WebLab25</title>
-    </head>
-    <body>
-        <ul>
-            <li><a href="pages/accounts">Display information about the accounts of a given client</a></li>
-            <li><a href="pages/sumPayments">Display the sum of payments of a given client for a specified period</a></li>
-            <li><a href="pages/accountBalance">Display the balance of a given client’s account</a></li>
-            <li><a href="pages/makeAPay">Make a payment to another account</a></li>
-            <li><a href="pages/deactivateCard">Block the card</a></li>   
-        </ul>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebLab25 - Bank Staff Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            background-image: linear-gradient(to bottom, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .bank-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .bank-logo i {
+            font-size: 2.5rem;
+            color: #4dabf7;
+        }
+        
+        .bank-logo h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+        
+        .staff-info {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .staff-info i {
+            font-size: 1.2rem;
+        }
+        
+        .welcome-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            border-left: 5px solid #2a5298;
+        }
+        
+        .welcome-section h2 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .welcome-section p {
+            color: #555;
+            font-size: 1.05rem;
+        }
+        
+        .panel-title {
+            text-align: center;
+            color: #1e3c72;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .panel-title:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #4dabf7, #2a5298);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .action-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-top: 4px solid transparent;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .action-card:nth-child(1) {
+            border-top-color: #4dabf7;
+        }
+        
+        .action-card:nth-child(2) {
+            border-top-color: #20c997;
+        }
+        
+        .action-card:nth-child(3) {
+            border-top-color: #ff922b;
+        }
+        
+        .action-card:nth-child(4) {
+            border-top-color: #e03131;
+        }
+        
+        .action-card:nth-child(5) {
+            border-top-color: #7950f2;
+        }
+        
+        .card-header {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .action-card:nth-child(1) .card-icon {
+            background-color: #4dabf7;
+        }
+        
+        .action-card:nth-child(2) .card-icon {
+            background-color: #20c997;
+        }
+        
+        .action-card:nth-child(3) .card-icon {
+            background-color: #ff922b;
+        }
+        
+        .action-card:nth-child(4) .card-icon {
+            background-color: #e03131;
+        }
+        
+        .action-card:nth-child(5) .card-icon {
+            background-color: #7950f2;
+        }
+        
+        .card-header h3 {
+            color: #1e3c72;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-content p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .action-link {
+            display: inline-block;
+            background: linear-gradient(to right, #2a5298, #1e3c72);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .action-link:hover {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            box-shadow: 0 4px 8px rgba(30, 60, 114, 0.2);
+        }
+        
+        .action-link i {
+            margin-left: 8px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bank-logo h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="bank-logo">
+                <i class="fas fa-university"></i>
+                <h1>WebLab25 Bank</h1>
+            </div>
+            <div class="staff-info">
+                <i class="fas fa-user-shield"></i>
+                <span>Staff Panel | Secure Access</span>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="welcome-section">
+            <h2>Welcome to Bank Staff Panel</h2>
+            <p>This secure portal is dedicated to authorized bank staff only. From here you can perform various banking operations including viewing client information, processing payments, and managing accounts. Please ensure you follow all security protocols when handling sensitive client data.</p>
+        </div>
+        
+        <h2 class="panel-title">Available Actions</h2>
+        
+        <div class="actions-grid">
+            <div class="action-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Client Accounts</h3>
+                </div>
+                <div class="card-content">
+                    <p>Display detailed information about the accounts of a specific client, including account status, type, and creation date.</p>
+                    <a href="pages/accounts" class="action-link">Access Client Accounts <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="action-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Payment Summary</h3>
+                </div>
+                <div class="card-content">
+                    <p>Display the total sum of payments made by a specific client for a specified period with detailed transaction breakdown.</p>
+                    <a href="pages/sumPayments" class="action-link">View Payment Summary <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="action-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3>Account Balance</h3>
+                </div>
+                <div class="card-content">
+                    <p>Check the current balance of a specific client's account, including available funds and pending transactions.</p>
+                    <a href="pages/accountBalance" class="action-link">Check Account Balance <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="action-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Make a Payment</h3>
+                </div>
+                <div class="card-content">
+                    <p>Process a payment from a client's account to another account, either internal or external to the bank.</p>
+                    <a href="pages/makeAPay" class="action-link">Initiate Payment <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="action-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-ban"></i>
+                    </div>
+                    <h3>Card Management</h3>
+                </div>
+                <div class="card-content">
+                    <p>Block or deactivate a client's card due to loss, theft, suspicious activity, or at client's request.</p>
+                    <a href="pages/deactivateCard" class="action-link">Manage Card Status <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
